@@ -1,0 +1,6 @@
+#/bin/bash
+cd ~/programs/test1/test
+pwd
+git add .
+git commit -a -m "new commit" 
+git push origin master

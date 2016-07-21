@@ -113,3 +113,19 @@ public class Upload extends HttpServlet
 	                getClass( ).getName( )+": POST method required.");
 	   } 
 }
+
+/*
+File[] listOfFiles = folder.listFiles();
+int i;
+System.out.println(request.getContextPath());
+for (i = 0; i < listOfFiles.length; i++) 
+{
+	   	if (listOfFiles[i].isFile()) 
+		{
+		    %> <li> <% out.println(listOfFiles[i]); %> </li> <% 
+		} 
+		else if (listOfFiles[i].isDirectory())
+		{
+			//System.out.println("Directory " + listOfFiles[i].getName());
+		} 
+}*/
