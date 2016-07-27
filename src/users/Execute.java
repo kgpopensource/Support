@@ -68,4 +68,58 @@ public class Execute
 			e.printStackTrace();
 		} 
     }
+    public static void pull1()
+    {
+    	try 
+    	{
+    		Runtime runtime = Runtime.getRuntime();
+    		Process process = runtime.exec("/home/krunal/workspace/Support/src/users/pull1.sh");
+    		int exitValue = process.waitFor();
+    		System.out.println("exit value: " + exitValue);
+    		BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    		String line = "";
+    		while ((line = buf.readLine()) != null) 
+    		{
+    			System.out.println("exec response: " + line);               
+    		}
+			
+		}
+    	catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	catch (IOException e)
+    	{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    }
+    public static void push1()
+    {
+    	try 
+    	{
+			//Process p = new ProcessBuilder().start(); new String[] { "/bin/bash", "-c", ""}
+
+    		Runtime runtime = Runtime.getRuntime();
+    		Process process = runtime.exec("/home/krunal/workspace/Support/src/users/push.sh");
+    		int exitValue = process.waitFor();
+    		System.out.println("exit value: " + exitValue);
+    		BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    		String line = "";
+    		while ((line = buf.readLine()) != null) 
+    		{
+    			System.out.println("exec response: " + line);               
+    		}
+            
+		}
+    	catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	catch (IOException e)
+    	{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    }
 }

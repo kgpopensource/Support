@@ -21,23 +21,48 @@
 		} 
 		else
 		{		
-			%><div> <li> <% out.println(listOfFiles[i].getName()); %> </li> <button type="button">pull</button> 
-			<button type="button">push</button> </div><% 
+			%>
+		    <li> <% out.println(listOfFiles[i].getName()); %>
+		    <form action="fileutil" method="post" >  
+		    <input type="hidden" name="hide" id="hide" value="<%=listOfFiles[i].getName() %>" /> 
+			<select name="sel">
+  				<option value="pull & Download">pull</option>
+  				<option value="push">push</option>
+			</select>
+			<input type="submit" value="submit"/>
+			</form>
+			</li><% 
 		} 
    }
    %>   
+   <div id="result">
+    <pre>
+        ${requestScope.response}
+    </pre>
+   </div>
    
 </div>
-<form action="upload" method="post" enctype="multipart/form-data">
-Select File to Upload:<input type="file" name="fileName" multiple>
-<br>
+<br/>
+<form action="" method="post" enctype="multipart/form-data">
+Upload file<input type="file" name="fileName" multiple></input>
+<br/>
 <input type="submit" value="Upload new File and Push">
 </form>
-
-<form action="download" method="get" ">
-<br>
-  <input type="submit" value="Pull all files"> 
+<br/>
+<form action="download" method="get">
+Pull files
+<br/>
+  <input type="submit" value="Pull and Download All files"> 
 </form>  
+<br/>
 
+<!--  <form action="" method="post" enctype="multipart/form-data">
+Push Files
+<br>
+<input type="submit" value="Upload and Push all files">
+</form>   -->
+<br/><br/><br/>
+
+<textarea id="gitlog" placeholder="placeholder" onkeyup="resizeTextarea('InputTextArea')" style="width: 300px; height: 150px;"></textarea>
 </body>
 </html>

@@ -10,7 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  
   <servlet>
     <servlet-name>upload</servlet-name>
     <servlet-class>users.Upload</servlet-class>
@@ -21,15 +20,22 @@
   </servlet-mapping>
   
   <servlet>
-	<servlet-name>DownloadServlet</servlet-name>
-	<servlet-class>users.Download</servlet-class>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>users.Download</servlet-class>
   </servlet>
-
-
   <servlet-mapping>
-	<servlet-name>DownloadServlet</servlet-name>
-	<url-pattern>/download</url-pattern>
-  </servlet-mapping>  
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FileUtil</servlet-name>
+    <servlet-class>users.FileUtil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUtil</servlet-name>
+    <url-pattern>/fileutil</url-pattern>
+  </servlet-mapping>
   
   <context-param>
     <description>Location to store uploaded file</description>
@@ -38,4 +44,15 @@
          /home/krunal/programs/test1/test/
      	</param-value>
   </context-param>
+  
+  <servlet>
+	<servlet-name>myjsp</servlet-name>
+	<jsp-file>/index.jsp</jsp-file>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>myjsp</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+    
 </web-app>

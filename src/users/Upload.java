@@ -28,19 +28,22 @@ public class Upload extends HttpServlet
 	   private int maxMemSize = 4 * 1024;
 	   private File file ;
 
-	   public void init( ){
+	   public void init( )
+	   {
 	      // Get the file location where it would be stored.
-	      filePath = 
-	             getServletContext().getInitParameter("file-upload"); 
+	      //filePath =  getServletContext().getInitParameter("file-upload");
+	      filePath= "/home/krunal/programs/test1/test/";
 	   }
-	   public void doPost(HttpServletRequest request, 
-	               HttpServletResponse response)
-	              throws ServletException, java.io.IOException {
+	   
+	   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException 
+	   {
 	      // Check that we have a file upload request
 	      isMultipart = ServletFileUpload.isMultipartContent(request);
 	      response.setContentType("text/html");
 	      java.io.PrintWriter out = response.getWriter( );
-	      if( !isMultipart ){
+	      
+	      if( !isMultipart )
+	      {
 	         out.println("<html>");
 	         out.println("<head>");
 	         out.println("<title>Servlet upload</title>");  
@@ -69,11 +72,7 @@ public class Upload extends HttpServlet
 	      // Process the uploaded file items
 	      Iterator i = fileItems.iterator();
 
-	      out.println("<html>");
-	      out.println("<head>");
-	      out.println("<title>Servlet upload</title>");  
-	      out.println("</head>");
-	      out.println("<body>");
+	    
 	      while ( i.hasNext () ) 
 	      {
 	         FileItem fi = (FileItem)i.next();
@@ -93,13 +92,10 @@ public class Upload extends HttpServlet
 	               file = new File( filePath + 
 	               fileName.substring(fileName.lastIndexOf("\\")+1)) ;
 	            }
-	            fi.write( file ) ;
-	            out.println("Uploaded Filename: " + fileName + "<br>");
+	            fi.write( file );
 	         }
 	         
 	      }
-	      out.println("</body>");
-	      out.println("</html>");
 	      Execute.push();
 	   }catch(Exception ex) {
 	       System.out.println(ex);
@@ -113,19 +109,3 @@ public class Upload extends HttpServlet
 	                getClass( ).getName( )+": POST method required.");
 	   } 
 }
-
-/*
-File[] listOfFiles = folder.listFiles();
-int i;
-System.out.println(request.getContextPath());
-for (i = 0; i < listOfFiles.length; i++) 
-{
-	   	if (listOfFiles[i].isFile()) 
-		{
-		    %> <li> <% out.println(listOfFiles[i]); %> </li> <% 
-		} 
-		else if (listOfFiles[i].isDirectory())
-		{
-			//System.out.println("Directory " + listOfFiles[i].getName());
-		} 
-}*/
