@@ -68,7 +68,7 @@ public class FileUtil extends HttpServlet
 	     }
 	     else if(select.equals("push"))
 	     {
-	    	 System.out.println("push");
+	    	System.out.println("push");
 	    	Execute.push();
 	    	request.setAttribute("response", "pushed the file");    
 			request.getRequestDispatcher("/index.jsp").forward(request,response);

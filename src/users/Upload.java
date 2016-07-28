@@ -27,18 +27,12 @@ public class Upload extends HttpServlet
 	   private int maxFileSize = 5000 * 1024;
 	   private int maxMemSize = 1024 * 1024;
 	   private File file ;
-
-	   public void init( )
-	   {
-	      // Get the file location where it would be stored.
-	      //filePath =  getServletContext().getInitParameter("file-upload");
-	      filePath= "/home/krunal/programs/test1/test/";
-	   }
 	   
 	   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException 
 	   {
-	      // Check that we have a file upload request
+		  
 	      isMultipart = ServletFileUpload.isMultipartContent(request);
+	       
 	      response.setContentType("text/html");
 	      java.io.PrintWriter out = response.getWriter( );
 	      
@@ -96,7 +90,19 @@ public class Upload extends HttpServlet
 	    		  }
 	    		  fi.write( file );
 	    	  }
+	    	  else
+	    	  {
+	    	      if (fi.getFieldName().equals("hidn") )
+	    	      {
+	    	          String value = fi.getString();
+	    	          filePath=value;
 
+	    	 	      filePath=filePath + "/";
+	    	 	      
+	    	 	      System.out.println(filePath);
+	    	           // Do something with the value
+	    	      }
+	    	  }
 	      }
 	          
 	      Execute.push();
@@ -106,10 +112,8 @@ public class Upload extends HttpServlet
 	      {
 	    	  System.out.println(ex);
 	      }
-	      
-	      request.setAttribute("response", "uploaded all the files");    
-		  request.getRequestDispatcher("/index.jsp").forward(request,response);
-	
+	       
+		  request.getRequestDispatcher("/browser.jsp").forward(request,response);	  
 	   }
 	   
 	   public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, java.io.IOException 

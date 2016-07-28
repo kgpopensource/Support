@@ -40,7 +40,7 @@ public class FileBrowser extends HttpServlet
 	{
 		String filename=request.getParameter("hide");
 	    String filepath = "/home/krunal/programs/test1/test/"+filename;
-	    System.out.println(filepath);
+	    //System.out.println(filepath);
 	    request.setAttribute("path", filepath);
 	    request.getRequestDispatcher("/browser.jsp").forward(request,response);
 	    

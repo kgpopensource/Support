@@ -33,7 +33,7 @@ public class Download extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{			  
-		String filepath = "/home/krunal/programs/test1/test/";
+		/*String filepath = "/home/krunal/programs/test1/test/";
 		File folder=new File(filepath);
 		String zipfile="/home/krunal/programs/test1/test/allfiles.zip";
 		//Execute.pull();
@@ -91,8 +91,8 @@ public class Download extends HttpServlet
 			System.out.println(zi.getName() + " is deleted!");
 		}else{
 			System.out.println("Delete operation is failed.");
-		}
-        		
+		}*/
+        System.out.println(request.getParameter("hid"));		
 	}
 	
 	public static void addToZipFile(File f,String fileName, ZipOutputStream zos) throws FileNotFoundException, IOException 
@@ -118,6 +118,27 @@ public class Download extends HttpServlet
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		String filepath=request.getParameter("hide1");
+	    String filename = request.getParameter("hide2");
+	    
+		response.setContentType("text/html");  
+
+		PrintWriter out = response.getWriter();  
+
+		response.setContentType("APPLICATION/OCTET-STREAM");   
+		response.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");   
 		
+		FileInputStream fileInputStream = new FileInputStream(filepath+"/"+filename);  
+
+		int i;   
+		while ((i=fileInputStream.read()) != -1)
+		{  
+			out.write(i);   
+		}
+
+		fileInputStream.close();
+		
+		out.flush();
+		out.close();
 	}
 }
