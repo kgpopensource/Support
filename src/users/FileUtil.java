@@ -33,7 +33,7 @@ public class FileUtil extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{			  
-	
+	   
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -41,47 +41,39 @@ public class FileUtil extends HttpServlet
 		String select=request.getParameter("sel");
 		String filename=request.getParameter("hide");
 	    System.out.println(select+" "+filename);
+	    String filepath = "/home/krunal/programs/test1/test/";
 	    
-	    if(select.equals("pull and download"))
+	    if(select.equals("pull"))
 	    {
-	    	pull_download(request,response,filename);
-	    	request.setAttribute("response", "file pulled ");
-	    }
-	    else if (select.equals("push"))
-	    {
-	    	request.setAttribute("response", "file pushed");
-	    	push();
-	    }
-		
-		request.getRequestDispatcher("/index.jsp").forward(request,response);
-	}
-	
-	
-	public void pull_download(HttpServletRequest request, HttpServletResponse response, String filename) throws ServletException, IOException
-	{
-		Execute.pull1();
-		String filepath = "/home/krunal/programs/test1/test/";
-		response.setContentType("text/html");  
+	      	System.out.println("pull");
+			Execute.pull();
+			response.setContentType("text/html");  
 
-		PrintWriter out = response.getWriter();  
+			PrintWriter out = response.getWriter();  
 
-		response.setContentType("APPLICATION/OCTET-STREAM");   
-		response.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");   
+			response.setContentType("APPLICATION/OCTET-STREAM");   
+			response.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");   
 
-		FileInputStream fileInputStream = new FileInputStream(filepath+filename);  
+			FileInputStream fileInputStream = new FileInputStream(filepath+filename);  
 
-		int i;   
-		while ((i=fileInputStream.read()) != -1)
-		{  
-			out.write(i);   
-		}
+			int i;   
+			while ((i=fileInputStream.read()) != -1)
+			{  
+				out.write(i);   
+			}
 
-		fileInputStream.close();   
-		out.close(); 		
-	}
-	
-	public void push()
-	{
-		Execute.push1();
+			fileInputStream.close();
+			out.flush();
+			out.close();
+	     }
+	     else if(select.equals("push"))
+	     {
+	    	 System.out.println("push");
+	    	Execute.push();
+	    	request.setAttribute("response", "pushed the file");    
+			request.getRequestDispatcher("/index.jsp").forward(request,response);
+	     } 
+	    
+	   
 	}
 }

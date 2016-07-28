@@ -45,14 +45,14 @@
      	</param-value>
   </context-param>
   
+  
   <servlet>
-	<servlet-name>myjsp</servlet-name>
-	<jsp-file>/index.jsp</jsp-file>
+    <servlet-name>FileBrowser</servlet-name>
+    <servlet-class>users.FileBrowser</servlet-class>
   </servlet>
- 
   <servlet-mapping>
-    <servlet-name>myjsp</servlet-name>
-    <url-pattern>/index</url-pattern>
+    <servlet-name>FileBrowser</servlet-name>
+    <url-pattern>/filebrowser</url-pattern>
   </servlet-mapping>
     
 </web-app>

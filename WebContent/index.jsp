@@ -24,9 +24,9 @@
 			%>
 		    <li> <% out.println(listOfFiles[i].getName()); %>
 		    <form action="fileutil" method="post" >  
-		    <input type="hidden" name="hide" id="hide" value="<%=listOfFiles[i].getName() %>" /> 
+		    <input type="hidden" name="hide" value="<%=listOfFiles[i].getName() %>" /> 
 			<select name="sel">
-  				<option value="pull & Download">pull</option>
+  				<option value="pull">pull</option>
   				<option value="push">push</option>
 			</select>
 			<input type="submit" value="submit"/>
@@ -43,7 +43,8 @@
    
 </div>
 <br/>
-<form action="" method="post" enctype="multipart/form-data">
+
+<form action="upload" method="post" enctype="multipart/form-data">
 Upload file<input type="file" name="fileName" multiple></input>
 <br/>
 <input type="submit" value="Upload new File and Push">

@@ -37,14 +37,13 @@ public class Download extends HttpServlet
 		File folder=new File(filepath);
 		String zipfile="/home/krunal/programs/test1/test/allfiles.zip";
 		//Execute.pull();
+		File files[]=folder.listFiles();
 		
 		try 
 		{
 			FileOutputStream fos = new FileOutputStream(zipfile);
 			ZipOutputStream zos = new ZipOutputStream(fos);
 			
-			File files[]=folder.listFiles();
-
 			for(File f:files)
 			{
 				if(f.isDirectory())
@@ -83,9 +82,17 @@ public class Download extends HttpServlet
 		}
 
 		fileInputStream.close();   
-		out.close(); 	
-
-			
+		out.close();
+		
+		File zi=new File("/home/krunal/programs/test1/test/allfiles.zip");
+		
+		if(zi.delete())
+		{
+			System.out.println(zi.getName() + " is deleted!");
+		}else{
+			System.out.println("Delete operation is failed.");
+		}
+        		
 	}
 	
 	public static void addToZipFile(File f,String fileName, ZipOutputStream zos) throws FileNotFoundException, IOException 

@@ -24,8 +24,8 @@ public class Upload extends HttpServlet
 {
 	private boolean isMultipart;
 	   private String filePath;
-	   private int maxFileSize = 50 * 1024;
-	   private int maxMemSize = 4 * 1024;
+	   private int maxFileSize = 5000 * 1024;
+	   private int maxMemSize = 1024 * 1024;
 	   private File file ;
 
 	   public void init( )
@@ -63,47 +63,57 @@ public class Upload extends HttpServlet
 	      // Create a new file upload handler
 	      ServletFileUpload upload = new ServletFileUpload(factory);
 	      // maximum file size to be uploaded.
-	      upload.setSizeMax( maxFileSize );
 
-	      try{ 
+	      try
+	      { 
 	      // Parse the request to get file items.
 	      List fileItems = upload.parseRequest(request);
 		
 	      // Process the uploaded file items
 	      Iterator i = fileItems.iterator();
-
-	    
+ 
 	      while ( i.hasNext () ) 
 	      {
-	         FileItem fi = (FileItem)i.next();
-	         if ( !fi.isFormField () )	
-	         {
-	            // Get the uploaded file parameters
-	            String fieldName = fi.getFieldName();
-	            String fileName = fi.getName();
-	            String contentType = fi.getContentType();
-	            boolean isInMemory = fi.isInMemory();
-	            long sizeInBytes = fi.getSize();
-	            // Write the file
-	            if( fileName.lastIndexOf("\\") >= 0 ){
-	               file = new File( filePath + 
-	               fileName.substring( fileName.lastIndexOf("\\"))) ;
-	            }else{
-	               file = new File( filePath + 
-	               fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-	            }
-	            fi.write( file );
-	         }
-	         
+	    	  FileItem fi = (FileItem)i.next();
+	    	  if ( !fi.isFormField () )	
+	    	  {
+	    		  // Get the uploaded file parameters
+	    		  String fieldName = fi.getFieldName();
+	    		  String fileName = fi.getName();
+	    		  String contentType = fi.getContentType();
+	    		  boolean isInMemory = fi.isInMemory();
+	    		  long sizeInBytes = fi.getSize();
+	    		  // Write the file
+	    		  if( fileName.lastIndexOf("\\") >= 0 )
+	    		  {
+	    			  file = new File( filePath + 
+	    					  fileName.substring( fileName.lastIndexOf("\\"))) ;
+	    		  }
+	    		  else
+	    		  {
+	    			  file = new File( filePath + 
+	    					  fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+	    		  }
+	    		  fi.write( file );
+	    	  }
+
 	      }
+	          
 	      Execute.push();
-	   }catch(Exception ex) {
-	       System.out.println(ex);
+	      
+	      }
+	      catch(Exception ex) 
+	      {
+	    	  System.out.println(ex);
+	      }
+	      
+	      request.setAttribute("response", "uploaded all the files");    
+		  request.getRequestDispatcher("/index.jsp").forward(request,response);
+	
 	   }
-	   }
-	   public void doGet(HttpServletRequest request, 
-	                       HttpServletResponse response)
-	        throws ServletException, java.io.IOException {
+	   
+	   public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, java.io.IOException 
+	   {
 	        
 	        throw new ServletException("GET method used with " +
 	                getClass( ).getName( )+": POST method required.");
